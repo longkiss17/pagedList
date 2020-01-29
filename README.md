@@ -22,10 +22,13 @@ list.data // return object array
 * scope      // 페이징 범위<br>
 
 <h2>Methods</h2><br>
-* sort(objectKey, order);           // 정렬(정렬 키, 정렬 순서)<br>
-* filter(objectKey, filterKey);     // 검색(검색 키, 검색어)<br>
-* go(pageNumber);                   // 페이지 이동(페이지 번호)<br>
-* first()                           // 첫 페이지 이동<br>
-* last()                            // 마지막 페이지 이동<br>
-* prev()                            // 이전 페이지 이동<br>
-* next()                            // 다음 페이지 이동<br>
+
+| Name | Description |
+| ------ | ------ |
+| sort(objectKey, order) | 정렬(정렬 키, 정렬 순서) |
+| filter(objectKey, filterKey) | 검색(검색 키, 검색어) |
+| go(pageNumber) | 페이지 이동(페이지 번호) |
+| first() | 첫 페이지 이동 |
+| last() | 마지막 페이지 이동 |
+| prev() | 이전 페이지 이동 |
+| next() | 다음 페이지 이동 |
