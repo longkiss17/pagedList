@@ -1,46 +1,63 @@
+// created by longkiss17
 function PagedList(data = [], opts = {}) {
-	this.data = data;
-	this.length = data.length;
+	this.data = [];
 	this.pages = [];
 
-	let origin = data;
-	let page = opts.page || data.length;
+	let originData = data;
+	let computedData = data;
+
+	let length = originData.length;
+	let page = opts.pageLength || originData.length;
 	let scope = opts.scope || 10;
 	let current = 1;
 	let first = 1;
 	let last = 1;
-	let length = 1;
 	let sortKey = '';
 	let filter = '';
 	let filterKey = '';
 	let order = -1;
 	let sortOrders = {};
 
-	const createData = (callback) => {
-		if (origin instanceof Array === false) return;
+	const init = (callback) => {
+		if (originData instanceof Array === false) return;
 
 		setFilteredData();
 		setSortedData();
 		createPagination();
 
-		this.data = this.data.slice(current * page - page, current * page);
+		this.data = computedData.slice(current * page - page, current * page);
 
-		if (callback) callback();
+		if (callback) callback({ data: this.data, pages: this.pages });
 	};
 
-	const createSortOrders = () => {
-		if (this.data.lenght === 0) return sortOrders;
-
-		let obj = this.data[0];
-		Object.keys(obj).forEach((key) => {
-			sortOrders[key] = 1;
-		});
-
-		return sortOrders;
+	const createPagination = () => {
+		this.pages = [];
+		length = computedData.length;
+		last = Math.ceil(length / page);
+		let extend = length % page > 0 ? 1 : 0;
+		for (let i = 1; i <= length / page + extend; i++) {
+			this.pages.push({
+				index: first + (i - 1),
+				current: current === i
+			});
+		}
+		let currentPage = Math.ceil(current / scope) - 1;
+		this.pages = this.pages.slice(currentPage * scope, scope * (currentPage + 1));
 	};
+
+	// const createSortOrders = () => {
+	// 	if (this.data.lenght === 0) return sortOrders;
+
+	// 	let obj = this.data[0];
+	// 	Object.keys(obj).forEach((key) => {
+	// 		sortOrders[key] = 1;
+	// 	});
+
+	// 	return sortOrders;
+	// };
 
 	const setSortedData = () => {
-		let data = this.data;
+		let data = originData;
 
 		if (sortKey) {
 			data = data.slice().sort((a, b) => {
@@ -50,11 +67,11 @@ function PagedList(data = [], opts = {}) {
 			});
 		}
 
-		this.data = data;
+		originData = data;
 	};
 
 	const setFilteredData = () => {
-		let data = origin;
+		let data = originData;
 
 		let check = (row) => {
 			return String(row).toLowerCase().indexOf(filter) > -1;
@@ -72,82 +89,79 @@ function PagedList(data = [], opts = {}) {
 			});
 		}
 
-		this.data = data;
+		computedData = data;
 	};
 
-	const createPagination = () => {
-		this.pages = [];
+	init(null);
 
-		length = this.data.length;
-		last = Math.ceil(length / page);
-
-		let extend = length % page > 0 ? 1 : 0;
-
-		for (let i = 1; i <= length / page + extend; i++) {
-			this.pages.push({
-				index: first + (i - 1),
-				current: current === i
-			});
-		}
-		let currentPage = Math.ceil(current / scope) - 1;
-		this.pages = this.pages.slice(currentPage * scope, scope * (currentPage + 1));
-	};
-
-	this.filter = (text = '', key = '') => {
+	PagedList.prototype.filter = (text = '', key = '', callback = null) => {
 		current = 1;
 		filter = text && text.toLowerCase();
 		filterKey = key;
-		createData();
+		init(callback);
 	};
 
-	this.sort = (key = '', o = 'ASC') => {
+	PagedList.prototype.sort = (key = '', o = 'ASC', callback = null) => {
 		sortKey = key;
 		order = o === 'ASC' ? -1 : 1;
 		sortOrders = createSortOrders();
-		createData();
+		init(callback);
 	};
 
-	this.reset = () => {
+	PagedList.prototype.getSortOrders = () => {
+		if (this.data.lenght === 0) return sortOrders;
+
+		let obj = this.data[0];
+		Object.keys(obj).forEach((key) => {
+			sortOrders[key] = 1;
+		});
+
+		return sortOrders;
+	};
+
+	PagedList.prototype.getSize = () => {
+		return originData.length;
+	};
+
+	PagedList.prototype.reset = () => {
 		current = 1;
 		sortKey = '';
 		filter = '';
 		filterKey = '';
 		order = -1;
-		createData();
+		init();
 	};
 
-	this.go = (number, callback) => {
+	PagedList.prototype.go = (number, callback) => {
 		current = number;
-		createData(callback);
+		init(callback);
 	};
 
-	this.next = (callback) => {
+	PagedList.prototype.next = (callback) => {
 		current = current === last ? current : current + 1;
-		createData(callback);
+		init(callback);
 	};
 
-	this.prev = (callback) => {
+	PagedList.prototype.prev = (callback) => {
 		current = current === first ? current : current - 1;
-		createData(callback);
+		init(callback);
 	};
 
-	this.first = (callback) => {
+	PagedList.prototype.first = (callback) => {
 		current = first;
-		createData(callback);
+		init(callback);
 	};
 
-	this.last = (callback) => {
+	PagedList.prototype.last = (callback) => {
 		current = last;
-		createData(callback);
+		init(callback);
 	};
 
-	this.changeViews = (views, callback) => {
+	PagedList.prototype.changeViews = (pageLength, callback) => {
 		current = 1;
-		page = views;
-		createData(callback);
+		page = pageLength;
+		init(callback);
 	};
-
-	createData();
 }
 
 export default PagedList;
