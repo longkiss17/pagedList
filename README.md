@@ -10,8 +10,6 @@ Paged List with js
   let list = new PagedList(array, opts);
   list.data // return object array
   </p>
-  <p></p>
-  <p></p>
 </code></pre>
 
 <h2>Options</h2><br>
