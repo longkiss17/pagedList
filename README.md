@@ -5,9 +5,13 @@ Paged List with js
 
 <h2>Usage</h2>
 <pre><code>
-  <p>import PagedList from "pagedList.js";  </p>
-  <p>let list = new PagedList(array, opts);  </p>
-  <p>list.data // return object array</p>
+  <p>
+  import PagedList from "pagedList.js";
+  let list = new PagedList(array, opts);
+  list.data // return object array
+  </p>
+  <p></p>
+  <p></p>
 </code></pre>
 
 <h2>Options</h2><br>
