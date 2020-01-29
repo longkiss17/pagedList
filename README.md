@@ -7,6 +7,7 @@ Paged List with js
 <pre>
   <code>
   import PagedList from "pagedList.js";
+  
   let list = new PagedList(array, opts);
   list.data // return object array
   </code>
