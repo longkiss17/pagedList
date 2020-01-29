@@ -5,9 +5,10 @@ Paged List with js
 
 <h2>#Usage</h2> <br>
 <code>
-import PagedList from "pagedList.js";\n
-let list = new PagedList(array, opts);\n
-list.data // return object array
+>>
+import PagedList from "pagedList.js";>>
+let list = new PagedList(array, opts);>>
+list.data // return object array>>
 </code>
 
 <h2>Options</h2><br>
