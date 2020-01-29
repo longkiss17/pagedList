@@ -5,7 +5,7 @@ Paged List with js
 
 <h2>Usage</h2>
 <pre>
-  <code>
+<code>
   import PagedList from "pagedList.js";
   
   let array = [1,2,3,4,5];
@@ -13,7 +13,7 @@ Paged List with js
   
   let list = new PagedList(array, opts);
   list.data // return object array
-  </code>
+</code>
 </pre>
 
 <h2>Options</h2><br>
