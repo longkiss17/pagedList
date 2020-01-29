@@ -6,8 +6,7 @@ Paged List with js
 <h2>Usage</h2>
 <pre>
   <code>
-  import PagedList from "pagedList.js";
-  
+  import PagedList from "pagedList.js";  
   let list = new PagedList(array, opts);
   list.data // return object array
   </code>
