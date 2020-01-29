@@ -4,9 +4,11 @@ Paged List with js
 리스트 페이징, 검색, 정렬을 손쉽게 할 수 있도록 제작된 모듈.
 
 <h2>#Usage</h2> <br>
+<code>
 import PagedList from "pagedList.js"; <br>
 let list = new PagedList(array, opts); <br>
 list.data // return object array <br>
+</code>
 
 <h2>Options</h2><br>
 
