@@ -6,11 +6,11 @@ Paged List with js
 <h2>Usage</h2>
 <pre>
   <code>
-  ``` javascript
+  ~~~javascript
   import PagedList from "pagedList.js";  
   let list = new PagedList(array, opts);
   list.data // return object array
-  ```
+  ~~~
   </code>
 </pre>
 
