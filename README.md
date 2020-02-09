@@ -32,3 +32,19 @@ list.data // return object array
 | last() | 마지막 페이지 이동 |
 | prev() | 이전 페이지 이동 |
 | next() | 다음 페이지 이동 |
+
+
+
+# toss-assignment
+
+> A Vue.js project
+
+## Build Setup
+
+```bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+```
